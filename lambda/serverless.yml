@@ -1,0 +1,19 @@
+service: sls-first-lambda
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  memorySize: 128
+  timeout: 3
+
+  functions:
+    index:
+      handler: index.handler
+      description: "sls test lambda"
+      events:
+        - http:
+            path: /
+            method: get
+            cors: true
